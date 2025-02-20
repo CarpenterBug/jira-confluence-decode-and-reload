@@ -1,0 +1,6 @@
+{
+    "name": "Jira Confluence decode and reload",
+    "description": "Reload Jira and Confluence pages with identity verification modal after successful verification",
+    "version": "1.0",
+    "manifest_version": 3
+}
