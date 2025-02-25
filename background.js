@@ -1,3 +1,15 @@
+import { getName, getOS, getLanguage } from './utils/browser.js';
+
+let browserData = {};
+
+getName().then((browser) => {
+    browserData = {
+        browser: browser,
+        os: getOS(),
+        language: getLanguage(),
+    };
+});
+
 chrome.action.onClicked.addListener((tab) => {
     const currentUrl = new URL(tab.url);
     const prefixToRemove = 'https://id.atlassian.com/step-up/start?continue=';
