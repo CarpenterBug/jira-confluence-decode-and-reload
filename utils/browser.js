@@ -6,33 +6,6 @@ export const getName = async () => {
         return 'Firefox';
     }
 
-    // Safari 3.0+ "[object HTMLElementConstructor]"
-    const isSafari =
-        /constructor/i.test(globalThis.HTMLElement) ||
-        (function (p) {
-            return p.toString() === '[object SafariRemoteNotification]';
-        })(
-            !globalThis['safari'] ||
-                (typeof safari !== 'undefined' &&
-                    globalThis['safari'].pushNotification)
-        );
-
-    if (isSafari) {
-        return 'Safari';
-    }
-
-    // TODO - Check if navigator works. Originally "!!document.documentMode"
-    const isIE = /*@cc_on!@*/ false || !!navigator.documentMode;
-    if (isIE) {
-        // Internet Explorer 6-11
-        return 'Internet Explorer';
-    }
-
-    if (!isIE && !!globalThis.StyleMedia) {
-        // Edge 20+
-        return 'Edge';
-    }
-
     if (navigator.brave && (await navigator.brave.isBrave())) {
         return 'Brave';
     }
