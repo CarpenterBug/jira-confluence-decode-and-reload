@@ -14,14 +14,14 @@ export const getName = async () => {
         !!globalThis.chrome &&
         (!!globalThis.chrome.webstore || !!globalThis.chrome.runtime);
 
+    if (isChrome && userAgent.indexOf('Edg') != -1) {
+        // Edge (Chromium)
+        return 'Edge';
+    }
+
     if (isChrome) {
         // Chrome 1 - 79
         return 'Chrome';
-    }
-
-    if (isChrome && userAgent.indexOf('Edg') != -1) {
-        // Edge (based on chromium) detection
-        return 'Edge';
     }
 
     return 'Unknown';
