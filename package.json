@@ -1,0 +1,34 @@
+{
+    "name": "jira-confluence-decode-and-reload",
+    "version": "1.0.0",
+    "description": "A simple Chrome, Edge and Brave (Firefox support coming soon) browser extension to reload Jira and Confluence pages with request one-time passcode modal after successful verification.",
+    "main": "background.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/CarpenterBug/jira-confluence-decode-and-reload.git"
+    },
+    "keywords": [
+        "Atlassian",
+        "Jira",
+        "Confluence",
+        "Chrome",
+        "Brave",
+        "Edge",
+        "Chromium",
+        "Browser",
+        "Extension"
+    ],
+    "author": {
+        "name": "CarpenterBug",
+        "email": "sulk-zero-dig@duck.com",
+        "url": "https://github.com/CarpenterBug"
+    },
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/CarpenterBug/jira-confluence-decode-and-reload/issues"
+    },
+    "homepage": "https://github.com/CarpenterBug/jira-confluence-decode-and-reload#readme",
+    "dependencies": {
+        "posthog-js": "^1.227.0"
+    }
+}

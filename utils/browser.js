@@ -48,3 +48,7 @@ export const getOS = () => {
 export const getLanguage = () => {
     return navigator.language;
 };
+
+export const showAlert = (args) => {
+    alert(args);
+};

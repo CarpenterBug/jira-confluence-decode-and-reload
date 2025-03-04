@@ -1,0 +1,13 @@
+const Config = {
+    getEnvVariable: (() => {
+        const _privateEnv = {
+            POSTHOG_KEY: '<PostHog_Project_API_key>',
+        };
+
+        return function (key) {
+            return _privateEnv[key];
+        };
+    })(),
+};
+
+export default Config;
