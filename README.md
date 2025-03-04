@@ -5,7 +5,17 @@ A simple Chrome, Edge and Brave (Firefox support coming soon) browser extension 
 # Installation
 
 1. Clone this repo
-2. Open the browser and go to Extensions and Manage Extensions or navigate to
+
+```
+git clone https://github.com/CarpenterBug/jira-confluence-decode-and-reload.git
+cd jira-confluence-decode-and-reload
+npm install
+
+// Rename "config.js_example" to "config.js"
+// Replace POSTHOG_KEY with your PostHog Project API key
+```
+
+2. Open the browser, go to Extensions and Manage Extensions or navigate to:
 
     Chrome: `chrome://extensions`
 
@@ -22,7 +32,8 @@ A simple Chrome, Edge and Brave (Firefox support coming soon) browser extension 
 
 ## TL;DR
 
-Once you verified your identity, reload all other tabs with the "request one-time passcode" modal to avoid receiving and entering a new verification code for every open tab.
+Once you verified your identity, reload the tabs with the "request one-time passcode" modal to avoid receiving and entering a new verification code for every open tab.
+![Tabs with Passcode](./images/screenshots/passcode_tabs.png)
 
 ## Current flow
 
