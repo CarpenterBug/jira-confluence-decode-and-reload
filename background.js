@@ -24,6 +24,16 @@ getName().then((browser) => {
     };
 });
 
+const capturePHEvent = (eventName, props = {}) => {
+    posthog.capture(eventName, {
+        $browser: browserData.browser,
+        $lib: manifest.short_name,
+        $lib_version: manifest.version,
+        'Library name': manifest.name,
+        ...props,
+    });
+};
+
 chrome.action.onClicked.addListener((tab) => {
     const currentUrl = new URL(tab.url);
     const prefixToRemove = 'https://id.atlassian.com/step-up/start?continue=';
@@ -37,11 +47,8 @@ chrome.action.onClicked.addListener((tab) => {
             ? newHostname.replace(/www\./i, '').split('.')[0]
             : newHostname;
 
-        posthog.capture('ext_btn_click', {
-            $browser: browserData.browser,
+        capturePHEvent('ext_btn_click', {
             $current_url: newHostname,
-            $lib: manifest.name,
-            $lib_version: manifest.version,
             'Company name': companyName,
         });
 
@@ -53,4 +60,41 @@ chrome.action.onClicked.addListener((tab) => {
             args: ['URL does not match the expected pattern.'],
         });
     }
+});
+
+chrome.management.onInstalled.addListener(() => {
+    chrome.management.getSelf().then((params) => {
+        capturePHEvent('ext_installed', {
+            'Library Install Type': params.installType,
+            'Library enabled': params.enabled,
+            getSelf: params,
+        });
+    });
+});
+
+chrome.management.onDisabled.addListener(() => {
+    chrome.management.getSelf().then((params) => {
+        capturePHEvent('ext_disabled', {
+            'Library Install Type': params.installType,
+            'Library enabled': params.enabled,
+            'Library Disabled Reason': params.disabledReason,
+            getSelf: params,
+        });
+    });
+});
+
+chrome.management.onEnabled.addListener(() => {
+    chrome.management.getSelf().then((params) => {
+        capturePHEvent('ext_enabled', {
+            'Library Install Type': params.installType,
+            'Library enabled': params.enabled,
+            getSelf: params,
+        });
+    });
+});
+
+chrome.management.onUninstalled.addListener(() => {
+    chrome.management.getSelf().then(() => {
+        capturePHEvent('ext_uninstalled');
+    });
 });
