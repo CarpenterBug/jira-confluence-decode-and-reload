@@ -1,8 +1,11 @@
 {
     "name": "Jira Confluence decode and reload",
+    "short_name": "JCdnr",
     "description": "Reload Jira and Confluence pages with identity verification modal after successful verification",
+    "homepage_url": "https://github.com/CarpenterBug/jira-confluence-decode-and-reload#readme",
     "version": "1.0",
     "manifest_version": 3,
+    "author": "sulk-zero-dig@duck.com",
     "action": {
         "default_icon": {
             "16": "images/icon16.png",
