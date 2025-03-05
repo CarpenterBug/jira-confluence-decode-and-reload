@@ -4,6 +4,7 @@ import posthog from './node_modules/posthog-js/dist/module.js';
 
 const manifest = chrome.runtime.getManifest();
 let browserData = {};
+let isPageLoaded = false;
 
 posthog.init(Config.getEnvVariable('POSTHOG_KEY'), {
     api_host: 'https://eu.i.posthog.com',
@@ -35,6 +36,9 @@ const capturePHEvent = (eventName, props = {}) => {
 };
 
 chrome.action.onClicked.addListener((tab) => {
+    // "Disable" clicks while page loads
+    if (!isPageLoaded) return;
+
     const currentUrl = new URL(tab.url);
     const prefixToRemove = 'https://id.atlassian.com/step-up/start?continue=';
 
@@ -62,6 +66,20 @@ chrome.action.onClicked.addListener((tab) => {
                 args: ['URL does not match the expected pattern.'],
             });
     }
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    // Reset to false on page load
+    changeInfo.status === 'loading' &&
+        isPageLoaded == true &&
+        (isPageLoaded = false);
+
+    changeInfo.status === 'complete' && (isPageLoaded = true);
+});
+
+chrome.runtime.onInstalled.addListener((details) => {
+    // Set to true on extension install/reload/update
+    isPageLoaded = true;
 });
 
 chrome.management.onInstalled.addListener((info) => {
