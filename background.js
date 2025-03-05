@@ -80,6 +80,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.runtime.onInstalled.addListener((details) => {
     // Set to true on extension install/reload/update
     isPageLoaded = true;
+
+    capturePHEvent('ext_installed/reloaded/updated', {
+        'Library Install/Reload/Update': details,
+    });
 });
 
 chrome.management.onInstalled.addListener((info) => {
