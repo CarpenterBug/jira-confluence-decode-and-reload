@@ -54,11 +54,13 @@ chrome.action.onClicked.addListener((tab) => {
 
         chrome.tabs.update(tab.id, { url: decodedUrl.href });
     } else {
-        chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            function: showAlert,
-            args: ['URL does not match the expected pattern.'],
-        });
+        //No scripting allowed on browser settings page
+        !/^(brave|chrome|edge):\/\//.test(currentUrl.href) &&
+            chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                function: showAlert,
+                args: ['URL does not match the expected pattern.'],
+            });
     }
 });
 
