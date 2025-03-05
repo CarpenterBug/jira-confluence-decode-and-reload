@@ -64,34 +64,28 @@ chrome.action.onClicked.addListener((tab) => {
     }
 });
 
-chrome.management.onInstalled.addListener(() => {
-    chrome.management.getSelf().then((params) => {
-        capturePHEvent('ext_installed', {
-            'Library Install Type': params.installType,
-            'Library enabled': params.enabled,
-            getSelf: params,
-        });
+chrome.management.onInstalled.addListener((info) => {
+    capturePHEvent('ext_installed', {
+        'Library Install Type': info.installType,
+        'Library Enabled': info.enabled,
+        getSelf: info,
     });
 });
 
-chrome.management.onDisabled.addListener(() => {
-    chrome.management.getSelf().then((params) => {
-        capturePHEvent('ext_disabled', {
-            'Library Install Type': params.installType,
-            'Library enabled': params.enabled,
-            'Library Disabled Reason': params.disabledReason,
-            getSelf: params,
-        });
+chrome.management.onDisabled.addListener((info) => {
+    capturePHEvent('ext_disabled', {
+        'Library Install Type': info.installType,
+        'Library Enabled': info.enabled,
+        'Library Disabled Reason': info.disabledReason,
+        getSelf: info,
     });
 });
 
-chrome.management.onEnabled.addListener(() => {
-    chrome.management.getSelf().then((params) => {
-        capturePHEvent('ext_enabled', {
-            'Library Install Type': params.installType,
-            'Library enabled': params.enabled,
-            getSelf: params,
-        });
+chrome.management.onEnabled.addListener((info) => {
+    capturePHEvent('ext_enabled', {
+        'Library Install Type': info.installType,
+        'Library Enabled': info.enabled,
+        getSelf: info,
     });
 });
 
