@@ -7,6 +7,9 @@
         "type": "git",
         "url": "git+https://github.com/CarpenterBug/jira-confluence-decode-and-reload.git"
     },
+    "scripts": {
+        "clean": "rm -rf node_modules"
+    },
     "keywords": [
         "Atlassian",
         "Jira",
