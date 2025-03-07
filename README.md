@@ -49,6 +49,10 @@ Requesting a new passcode or reloading the page will redirect you to the verific
 
 With this extension, once you verify your identity, on all the pages with the one-time passcode modal, you just have to click the extension icon, the page will reload and you are good to go.
 
+# Privacy policy
+
+This open-source extension collects anonymous usage data through [PostHog](https://posthog.com/), an open-source platform that provides product analytics for building better products. This data is captured with [PostHog's anonymous events](https://posthog.com/docs/data/anonymous-vs-identified-events) and none of this data can personally identify specific users given it does not contain any individually identifiable personal information. All collected data is stored in PostHog's EU cloud servers and is only used to understand usage patterns and guide development priorities. Our full source code, including all analytics implementation, is publicly available in our open-source GitHub repository for transparency.
+
 # Credits
 
 Atlassian logo from [Atlassian Design System](https://atlassian.design/foundations/logos) and [reload icon created by mavadee - Flaticon](https://www.flaticon.com/free-icons/reload).
