@@ -28,9 +28,9 @@ getName().then((browser) => {
 const capturePHEvent = (eventName, props = {}) => {
     posthog.capture(eventName, {
         $browser: browserData.browser,
-        $lib: manifest.short_name,
-        $lib_version: manifest.version,
-        'Library name': manifest.name,
+        'Extension Short Name': manifest.short_name,
+        'Extension Version': manifest.version,
+        'Extension Name': manifest.name,
         ...props,
     });
 };
@@ -82,31 +82,31 @@ chrome.runtime.onInstalled.addListener((details) => {
     isPageLoaded = true;
 
     capturePHEvent('ext_installed/reloaded/updated', {
-        'Library Install/Reload/Update': details,
+        'Extension Install/Reload/Update': details,
     });
 });
 
 chrome.management.onInstalled.addListener((info) => {
     capturePHEvent('ext_installed', {
-        'Library Install Type': info.installType,
-        'Library Enabled': info.enabled,
+        'Extension Install Type': info.installType,
+        'Extension Enabled': info.enabled,
         getSelf: info,
     });
 });
 
 chrome.management.onDisabled.addListener((info) => {
     capturePHEvent('ext_disabled', {
-        'Library Install Type': info.installType,
-        'Library Enabled': info.enabled,
-        'Library Disabled Reason': info.disabledReason,
+        'Extension Install Type': info.installType,
+        'Extension Enabled': info.enabled,
+        'Extension Disabled Reason': info.disabledReason,
         getSelf: info,
     });
 });
 
 chrome.management.onEnabled.addListener((info) => {
     capturePHEvent('ext_enabled', {
-        'Library Install Type': info.installType,
-        'Library Enabled': info.enabled,
+        'Extension Install Type': info.installType,
+        'Extension Enabled': info.enabled,
         getSelf: info,
     });
 });
