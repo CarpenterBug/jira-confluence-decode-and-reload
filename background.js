@@ -53,7 +53,7 @@ chrome.action.onClicked.addListener((tab) => {
 
         capturePHEvent('ext_btn_click', {
             $current_url: newHostname,
-            'Company name': companyName,
+            Company: companyName,
         });
 
         chrome.tabs.update(tab.id, { url: decodedUrl.href });
