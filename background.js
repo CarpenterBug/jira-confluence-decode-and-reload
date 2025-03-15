@@ -1,6 +1,6 @@
 import Config from './config.js';
 import { getName, getOS, getLanguage, showAlert } from './utils/browser.js';
-import posthog from './node_modules/posthog-js/dist/module.js';
+import posthog from './node_modules/posthog-js/dist/module.no-external.js';
 
 const manifest = chrome.runtime.getManifest();
 let browserData = {};
@@ -8,6 +8,7 @@ let isPageLoaded = false;
 
 posthog.init(Config.getEnvVariable('POSTHOG_KEY'), {
     api_host: 'https://eu.i.posthog.com',
+    disable_external_dependency_loading: true,
     autocapture: false,
     capture_pageview: false,
     capture_pageleave: false,
