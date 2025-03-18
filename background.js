@@ -26,12 +26,21 @@ getName().then((browser) => {
     };
 });
 
+// Validates if passed id matches this extension id
+const validateExtensionID = (id) => {
+    return chrome.runtime.id == id;
+};
+
 const capturePHEvent = (eventName, props = {}) => {
+    if (props['Extension ID'] && !validateExtensionID(props['Extension ID']))
+        return;
+
     posthog.capture(eventName, {
         $browser: browserData.browser,
+        'Extension Name': manifest.name,
         'Extension Short Name': manifest.short_name,
         'Extension Version': manifest.version,
-        'Extension Name': manifest.name,
+        'Extension ID (runtime)': id,
         ...props,
     });
 };
@@ -91,6 +100,7 @@ chrome.management.onInstalled.addListener((info) => {
     capturePHEvent('ext_installed', {
         'Extension Install Type': info.installType,
         'Extension Enabled': info.enabled,
+        'Extension ID': info.id,
         getSelf: info,
     });
 });
@@ -100,6 +110,7 @@ chrome.management.onDisabled.addListener((info) => {
         'Extension Install Type': info.installType,
         'Extension Enabled': info.enabled,
         'Extension Disabled Reason': info.disabledReason,
+        'Extension ID': info.id,
         getSelf: info,
     });
 });
@@ -108,6 +119,7 @@ chrome.management.onEnabled.addListener((info) => {
     capturePHEvent('ext_enabled', {
         'Extension Install Type': info.installType,
         'Extension Enabled': info.enabled,
+        'Extension ID': info.id,
         getSelf: info,
     });
 });
