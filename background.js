@@ -40,11 +40,11 @@ chrome.action.onClicked.addListener((tab) => {
     // "Disable" clicks while page loads
     if (!isPageLoaded) return;
 
-    const currentUrl = new URL(tab.url);
+    const currentHref = new URL(tab.url).href;
     const prefixToRemove = 'https://id.atlassian.com/step-up/start?continue=';
 
-    if (currentUrl.href.startsWith(prefixToRemove)) {
-        const encodedPart = currentUrl.href.replace(prefixToRemove, '');
+    if (currentHref.startsWith(prefixToRemove)) {
+        const encodedPart = currentHref.replace(prefixToRemove, '');
         const decodedUrl = new URL(decodeURIComponent(encodedPart));
         const newHostname = decodedUrl.hostname;
 
@@ -59,8 +59,8 @@ chrome.action.onClicked.addListener((tab) => {
 
         chrome.tabs.update(tab.id, { url: decodedUrl.href });
     } else {
-        //No scripting allowed on browser settings page
-        !/^(brave|chrome|edge):\/\//.test(currentUrl.href) &&
+        //No scripting allowed on browser settings and chrome web store pages
+        !/^(?:brave|chrome|edge)|chromewebstore\.google/i.test(currentHref) &&
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 function: showAlert,
