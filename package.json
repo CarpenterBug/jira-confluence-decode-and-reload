@@ -32,6 +32,6 @@
     },
     "homepage": "https://github.com/CarpenterBug/jira-confluence-decode-and-reload#readme",
     "dependencies": {
-        "posthog-js": "^1.231.0"
+        "posthog-js": "^1.231.2"
     }
 }
