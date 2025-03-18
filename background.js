@@ -40,7 +40,7 @@ const capturePHEvent = (eventName, props = {}) => {
         'Extension Name': manifest.name,
         'Extension Short Name': manifest.short_name,
         'Extension Version': manifest.version,
-        'Extension ID (runtime)': id,
+        'Extension ID (runtime)': chrome.runtime.id,
         ...props,
     });
 };
