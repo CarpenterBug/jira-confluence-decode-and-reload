@@ -112,8 +112,8 @@ chrome.management.onEnabled.addListener((info) => {
     });
 });
 
-chrome.management.onUninstalled.addListener(() => {
-    chrome.management.getSelf().then(() => {
-        capturePHEvent('ext_uninstalled');
+chrome.management.onUninstalled.addListener((id) => {
+    capturePHEvent('ext_uninstalled', {
+        'Extension ID': id,
     });
 });
